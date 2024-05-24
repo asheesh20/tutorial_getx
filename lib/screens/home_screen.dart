@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:tutorial_getx/screens/screen_one.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(context) {
     return SafeArea(
@@ -12,7 +18,8 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.blue,
         title: const Text('GetX Tutorial'),
       ),
-      body: Column(
+      body: /*
+      Column(
         children: [
           Card(
             child: ListTile(
@@ -78,6 +85,29 @@ class HomeScreen extends StatelessWidget {
               },
             ),
           ),
+        ],
+      ),*/
+          Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Center(
+              child: TextButton(
+                  onPressed: () {
+                    /*
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) {
+                        return ScreenOne(
+                          name: '23 May',
+                        );
+                      },
+                    ));
+                    */
+                    //Get.to(const ScreenOne(name: '23 May'));
+                    // Navigation using route method
+                    Get.toNamed('/screenOne', arguments: ['22th May']);
+                  },
+                  child: const Text('Go to next screen')))
         ],
       ),
       floatingActionButton: FloatingActionButton(
