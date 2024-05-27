@@ -23,9 +23,9 @@ class _ScreenTwoState extends State<ScreenTwo> {
         children: [
           TextButton(
             onPressed: () {
-              //Get.back();
-              //Get.back();
-              Get.toNamed('/');
+              Get.back();
+              Get.back();
+              //Get.toNamed('/');
             },
             child: const Center(child: Text('Go back')),
           ),

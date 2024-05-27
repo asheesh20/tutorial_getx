@@ -92,9 +92,10 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
-              child: TextButton(
-                  onPressed: () {
-                    /*
+            child:
+                /*TextButton(
+              onPressed: () {
+                /*
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) {
                         return ScreenOne(
@@ -103,11 +104,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ));
                     */
-                    //Get.to(const ScreenOne(name: '23 May'));
-                    // Navigation using route method
-                    Get.toNamed('/screenOne', arguments: ['22th May']);
-                  },
-                  child: const Text('Go to next screen')))
+                Get.to(ScreenOne(name: '23 May'));
+                // Navigation using route method
+                //Get.toNamed('/screenOne', arguments: ['22th May']);
+              },
+              child: const Text('Go to next screen'),
+            ),*/
+                Container(
+              color: Colors.red,
+              height: Get.height * 0.2,
+              width: Get.width * 0.3,
+              child: const Center(child: Text('My Box')),
+            ),
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton(

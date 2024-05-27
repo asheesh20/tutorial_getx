@@ -18,8 +18,8 @@ class _ScreenOneState extends State<ScreenOne> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        // title: Text('Screen One ' + widget.name),
-        title: Text('Screen One ' + Get.arguments[0]),
+        title: Text('Screen One ' + widget.name),
+        //title: Text('Screen One ' + Get.arguments[0]),
         backgroundColor: Colors.blue,
       ),
       body: Column(
