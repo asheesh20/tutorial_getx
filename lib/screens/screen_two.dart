@@ -14,7 +14,7 @@ class _ScreenTwoState extends State<ScreenTwo> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        title: const Text('Screen Two'),
+        title: const Text('Screen Two ASAP'),
         backgroundColor: Colors.blue,
       ),
       body: Column(
@@ -27,7 +27,12 @@ class _ScreenTwoState extends State<ScreenTwo> {
               Get.back();
               //Get.toNamed('/');
             },
-            child: const Center(child: Text('Go back')),
+            child: Column(
+              children: [
+                const Center(child: Text('Go back')),
+                Text('Testing'),
+              ],
+            ),
           ),
         ],
       ),
@@ -1479,260 +1484,260 @@ class _ServicesListState extends State<ServicesList> {
 }
 */
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'services_controller.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+// import 'package:intl/intl.dart';
+// import 'services_controller.dart';
 
-class ServicesList extends StatefulWidget {
-  const ServicesList({super.key});
-  @override
-  State<ServicesList> createState() => _ServicesListState();
-}
+// class ServicesList extends StatefulWidget {
+//   const ServicesList({super.key});
+//   @override
+//   State<ServicesList> createState() => _ServicesListState();
+// }
 
-class _ServicesListState extends State<ServicesList> {
-  final ServicesController guestController = Get.put(ServicesController());
+// class _ServicesListState extends State<ServicesList> {
+//   final ServicesController guestController = Get.put(ServicesController());
 
-  @override
-  void initState() {
-    guestController.getFoodOrders();
-    super.initState();
-  }
+//   @override
+//   void initState() {
+//     guestController.getFoodOrders();
+//     super.initState();
+//   }
 
-  bool isCheckoutDatePast(String checkOut) {
-    DateFormat format = DateFormat("EEE, d'th' MMM yy hh:mm a");
-    DateTime checkOutDate = format.parse(checkOut);
-    DateTime now = DateTime.now();
-    return checkOutDate.isBefore(now);
-  }
+//   bool isCheckoutDatePast(String checkOut) {
+//     DateFormat format = DateFormat("EEE, d'th' MMM yy hh:mm a");
+//     DateTime checkOutDate = format.parse(checkOut);
+//     DateTime now = DateTime.now();
+//     return checkOutDate.isBefore(now);
+//   }
 
-  void deleteGuestUser(BuildContext context, String docId) {
-    FirebaseFirestore.instance
-        .collection('guest_user')
-        .doc(docId)
-        .delete()
-        .then((_) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Document successfully deleted!',
-            style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.green,
-      ));
-    }).catchError((error) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Failed to delete document: $error',
-            style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.red,
-      ));
-    });
-  }
+//   void deleteGuestUser(BuildContext context, String docId) {
+//     FirebaseFirestore.instance
+//         .collection('guest_user')
+//         .doc(docId)
+//         .delete()
+//         .then((_) {
+//       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//         content: Text('Document successfully deleted!',
+//             style: TextStyle(color: Colors.white)),
+//         backgroundColor: Colors.green,
+//       ));
+//     }).catchError((error) {
+//       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//         content: Text('Failed to delete document: $error',
+//             style: TextStyle(color: Colors.white)),
+//         backgroundColor: Colors.red,
+//       ));
+//     });
+//   }
 
-  List<DataColumn> getDataColumns(String serviceType) {
-    switch (serviceType) {
-      case 'Food Orders':
-        return const [
-          DataColumn(label: Text('Sr.No')),
-          DataColumn(label: Text('Guest Name')),
-          DataColumn(label: Text('Date Time')),
-          DataColumn(label: Text('Room No')),
-          DataColumn(label: Text('Service Status')),
-          DataColumn(label: Text('Food Name')),
-        ];
-      case 'Room Service':
-        return const [
-          DataColumn(label: Text('Sr.No')),
-          DataColumn(label: Text('Guest Name')),
-          DataColumn(label: Text('Date Time')),
-          DataColumn(label: Text('Room No')),
-          DataColumn(label: Text('Service Status')),
-          DataColumn(label: Text('Details')),
-        ];
-      case 'Laundry Service':
-        return const [
-          DataColumn(label: Text('Sr.No')),
-          DataColumn(label: Text('Guest Name')),
-          DataColumn(label: Text('Date Time')),
-          DataColumn(label: Text('Room No')),
-          DataColumn(label: Text('Service Status')),
-          DataColumn(label: Text('Details')),
-        ];
-      default:
-        return const [
-          DataColumn(label: Text('Sr.No')),
-          DataColumn(label: Text('Guest Name')),
-          DataColumn(label: Text('Date Time')),
-          DataColumn(label: Text('Room No')),
-          DataColumn(label: Text('Service Status')),
-        ];
-    }
-  }
+//   List<DataColumn> getDataColumns(String serviceType) {
+//     switch (serviceType) {
+//       case 'Food Orders':
+//         return const [
+//           DataColumn(label: Text('Sr.No')),
+//           DataColumn(label: Text('Guest Name')),
+//           DataColumn(label: Text('Date Time')),
+//           DataColumn(label: Text('Room No')),
+//           DataColumn(label: Text('Service Status')),
+//           DataColumn(label: Text('Food Name')),
+//         ];
+//       case 'Room Service':
+//         return const [
+//           DataColumn(label: Text('Sr.No')),
+//           DataColumn(label: Text('Guest Name')),
+//           DataColumn(label: Text('Date Time')),
+//           DataColumn(label: Text('Room No')),
+//           DataColumn(label: Text('Service Status')),
+//           DataColumn(label: Text('Details')),
+//         ];
+//       case 'Laundry Service':
+//         return const [
+//           DataColumn(label: Text('Sr.No')),
+//           DataColumn(label: Text('Guest Name')),
+//           DataColumn(label: Text('Date Time')),
+//           DataColumn(label: Text('Room No')),
+//           DataColumn(label: Text('Service Status')),
+//           DataColumn(label: Text('Details')),
+//         ];
+//       default:
+//         return const [
+//           DataColumn(label: Text('Sr.No')),
+//           DataColumn(label: Text('Guest Name')),
+//           DataColumn(label: Text('Date Time')),
+//           DataColumn(label: Text('Room No')),
+//           DataColumn(label: Text('Service Status')),
+//         ];
+//     }
+//   }
 
-  List<DataCell> getDataCells(String serviceType, Map<String, dynamic> guest) {
-    switch (serviceType) {
-      case 'Food Orders':
-        return [
-          DataCell(Text(guest['sr_no'] ?? 'N/A')),
-          DataCell(Text(guest['guest_name'] ?? 'N/A',
-              style: TextStyle(color: Colors.white))),
-          DataCell(Text(guest['date_time'] ?? 'N/A',
-              style: TextStyle(color: Colors.white))),
-          DataCell(Text(guest['room_no'] ?? 'N/A')),
-          DataCell(Text(guest['service_status'] ?? 'N/A',
-              style: TextStyle(color: Colors.white))),
-          DataCell(Text(guest['food_name'] ?? 'N/A',
-              style: TextStyle(color: Colors.white))),
-        ];
-      case 'Room Service':
-        return [
-          DataCell(Text(guest['sr_no'] ?? 'N/A')),
-          DataCell(Text(guest['guest_name'] ?? 'N/A',
-              style: TextStyle(color: Colors.white))),
-          DataCell(Text(guest['date_time'] ?? 'N/A',
-              style: TextStyle(color: Colors.white))),
-          DataCell(Text(guest['room_no'] ?? 'N/A')),
-          DataCell(Text(guest['service_status'] ?? 'N/A',
-              style: TextStyle(color: Colors.white))),
-          DataCell(Text(guest['details'] ?? 'N/A',
-              style: TextStyle(color: Colors.white))),
-        ];
-      case 'Laundry Service':
-        return [
-          DataCell(Text(guest['sr_no'] ?? 'N/A')),
-          DataCell(Text(guest['guest_name'] ?? 'N/A',
-              style: TextStyle(color: Colors.white))),
-          DataCell(Text(guest['date_time'] ?? 'N/A',
-              style: TextStyle(color: Colors.white))),
-          DataCell(Text(guest['room_no'] ?? 'N/A')),
-          DataCell(Text(guest['service_status'] ?? 'N/A',
-              style: TextStyle(color: Colors.white))),
-          DataCell(Text(
-              (guest['List_of_laundry'] != null
-                  ? guest['List_of_laundry']
-                      .map((item) => '${item['name']} x${item['quantity']}')
-                      .join(', ')
-                  : 'N/A'),
-              style: TextStyle(color: Colors.white))),
-        ];
-      default:
-        return [
-          DataCell(Text(guest['sr_no'] ?? 'N/A')),
-          DataCell(Text(guest['guest_name'] ?? 'N/A',
-              style: TextStyle(color: Colors.white))),
-          DataCell(Text(guest['date_time'] ?? 'N/A',
-              style: TextStyle(color: Colors.white))),
-          DataCell(Text(guest['room_no'] ?? 'N/A')),
-          DataCell(Text(guest['service_status'] ?? 'N/A',
-              style: TextStyle(color: Colors.white))),
-        ];
-    }
-  }
+//   List<DataCell> getDataCells(String serviceType, Map<String, dynamic> guest) {
+//     switch (serviceType) {
+//       case 'Food Orders':
+//         return [
+//           DataCell(Text(guest['sr_no'] ?? 'N/A')),
+//           DataCell(Text(guest['guest_name'] ?? 'N/A',
+//               style: TextStyle(color: Colors.white))),
+//           DataCell(Text(guest['date_time'] ?? 'N/A',
+//               style: TextStyle(color: Colors.white))),
+//           DataCell(Text(guest['room_no'] ?? 'N/A')),
+//           DataCell(Text(guest['service_status'] ?? 'N/A',
+//               style: TextStyle(color: Colors.white))),
+//           DataCell(Text(guest['food_name'] ?? 'N/A',
+//               style: TextStyle(color: Colors.white))),
+//         ];
+//       case 'Room Service':
+//         return [
+//           DataCell(Text(guest['sr_no'] ?? 'N/A')),
+//           DataCell(Text(guest['guest_name'] ?? 'N/A',
+//               style: TextStyle(color: Colors.white))),
+//           DataCell(Text(guest['date_time'] ?? 'N/A',
+//               style: TextStyle(color: Colors.white))),
+//           DataCell(Text(guest['room_no'] ?? 'N/A')),
+//           DataCell(Text(guest['service_status'] ?? 'N/A',
+//               style: TextStyle(color: Colors.white))),
+//           DataCell(Text(guest['details'] ?? 'N/A',
+//               style: TextStyle(color: Colors.white))),
+//         ];
+//       case 'Laundry Service':
+//         return [
+//           DataCell(Text(guest['sr_no'] ?? 'N/A')),
+//           DataCell(Text(guest['guest_name'] ?? 'N/A',
+//               style: TextStyle(color: Colors.white))),
+//           DataCell(Text(guest['date_time'] ?? 'N/A',
+//               style: TextStyle(color: Colors.white))),
+//           DataCell(Text(guest['room_no'] ?? 'N/A')),
+//           DataCell(Text(guest['service_status'] ?? 'N/A',
+//               style: TextStyle(color: Colors.white))),
+//           DataCell(Text(
+//               (guest['List_of_laundry'] != null
+//                   ? guest['List_of_laundry']
+//                       .map((item) => '${item['name']} x${item['quantity']}')
+//                       .join(', ')
+//                   : 'N/A'),
+//               style: TextStyle(color: Colors.white))),
+//         ];
+//       default:
+//         return [
+//           DataCell(Text(guest['sr_no'] ?? 'N/A')),
+//           DataCell(Text(guest['guest_name'] ?? 'N/A',
+//               style: TextStyle(color: Colors.white))),
+//           DataCell(Text(guest['date_time'] ?? 'N/A',
+//               style: TextStyle(color: Colors.white))),
+//           DataCell(Text(guest['room_no'] ?? 'N/A')),
+//           DataCell(Text(guest['service_status'] ?? 'N/A',
+//               style: TextStyle(color: Colors.white))),
+//         ];
+//     }
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Obx(
-      () => Scaffold(
-        body: guestController.serviceOrderList.isEmpty
-            ? Center(child: Text('No Data Found !!'))
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Row(
-                      children: [
-                        Text('Services List',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.018)),
-                        Spacer(),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.grey[800],
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          padding: EdgeInsets.symmetric(horizontal: 12),
-                          child: DropdownButton<String>(
-                            value: guestController.selectedService.value,
-                            icon: Icon(Icons.arrow_drop_down,
-                                color: Colors.white),
-                            iconSize: 24,
-                            elevation: 16,
-                            style: TextStyle(color: Colors.white),
-                            underline: Container(),
-                            dropdownColor: Colors.grey[800],
-                            onChanged: (String? newValue) {
-                              if (newValue != null) {
-                                setState(() {
-                                  guestController.selectedService.value =
-                                      newValue;
-                                });
-                                switch (newValue) {
-                                  case 'Food Orders':
-                                    guestController.getFoodOrders();
-                                    break;
-                                  case 'Room Service':
-                                    guestController.getRoomServiceOrder();
-                                    break;
-                                  case 'Laundry Service':
-                                    guestController.getLaundryService();
-                                    break;
-                                }
-                              }
-                            },
-                            items: <String>[
-                              'Food Orders',
-                              'Room Service',
-                              'Laundry Service'
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                        SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.35),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Obx(() {
-                      return SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: SingleChildScrollView(
-                          child: DataTable(
-                            columnSpacing:
-                                MediaQuery.of(context).size.width * 0.05,
-                            columns: getDataColumns(
-                                guestController.selectedService.value),
-                            rows: guestController.serviceOrderList
-                                .asMap()
-                                .map((index, guest) {
-                                  guest['sr_no'] = (index + 1).toString();
-                                  return MapEntry(
-                                      index,
-                                      DataRow(
-                                          cells: getDataCells(
-                                              guestController
-                                                  .selectedService.value,
-                                              guest)));
-                                })
-                                .values
-                                .toList(),
-                          ),
-                        ),
-                      );
-                    }),
-                  ),
-                ],
-              ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Obx(
+//       () => Scaffold(
+//         body: guestController.serviceOrderList.isEmpty
+//             ? Center(child: Text('No Data Found !!'))
+//             : Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   Padding(
+//                     padding: const EdgeInsets.all(20.0),
+//                     child: Row(
+//                       children: [
+//                         Text('Services List',
+//                             style: TextStyle(
+//                                 color: Colors.white,
+//                                 fontWeight: FontWeight.bold,
+//                                 fontSize:
+//                                     MediaQuery.of(context).size.width * 0.018)),
+//                         Spacer(),
+//                         Container(
+//                           decoration: BoxDecoration(
+//                             color: Colors.grey[800],
+//                             borderRadius: BorderRadius.circular(5),
+//                           ),
+//                           padding: EdgeInsets.symmetric(horizontal: 12),
+//                           child: DropdownButton<String>(
+//                             value: guestController.selectedService.value,
+//                             icon: Icon(Icons.arrow_drop_down,
+//                                 color: Colors.white),
+//                             iconSize: 24,
+//                             elevation: 16,
+//                             style: TextStyle(color: Colors.white),
+//                             underline: Container(),
+//                             dropdownColor: Colors.grey[800],
+//                             onChanged: (String? newValue) {
+//                               if (newValue != null) {
+//                                 setState(() {
+//                                   guestController.selectedService.value =
+//                                       newValue;
+//                                 });
+//                                 switch (newValue) {
+//                                   case 'Food Orders':
+//                                     guestController.getFoodOrders();
+//                                     break;
+//                                   case 'Room Service':
+//                                     guestController.getRoomServiceOrder();
+//                                     break;
+//                                   case 'Laundry Service':
+//                                     guestController.getLaundryService();
+//                                     break;
+//                                 }
+//                               }
+//                             },
+//                             items: <String>[
+//                               'Food Orders',
+//                               'Room Service',
+//                               'Laundry Service'
+//                             ].map<DropdownMenuItem<String>>((String value) {
+//                               return DropdownMenuItem<String>(
+//                                 value: value,
+//                                 child: Text(value),
+//                               );
+//                             }).toList(),
+//                           ),
+//                         ),
+//                         SizedBox(
+//                             width: MediaQuery.of(context).size.width * 0.35),
+//                       ],
+//                     ),
+//                   ),
+//                   Expanded(
+//                     child: Obx(() {
+//                       return SingleChildScrollView(
+//                         scrollDirection: Axis.horizontal,
+//                         child: SingleChildScrollView(
+//                           child: DataTable(
+//                             columnSpacing:
+//                                 MediaQuery.of(context).size.width * 0.05,
+//                             columns: getDataColumns(
+//                                 guestController.selectedService.value),
+//                             rows: guestController.serviceOrderList
+//                                 .asMap()
+//                                 .map((index, guest) {
+//                                   guest['sr_no'] = (index + 1).toString();
+//                                   return MapEntry(
+//                                       index,
+//                                       DataRow(
+//                                           cells: getDataCells(
+//                                               guestController
+//                                                   .selectedService.value,
+//                                               guest)));
+//                                 })
+//                                 .values
+//                                 .toList(),
+//                           ),
+//                         ),
+//                       );
+//                     }),
+//                   ),
+//                 ],
+//               ),
+//       ),
+//     );
+//   }
+// }
 
 
 // import 'package:cloud_firestore/cloud_firestore.dart';
