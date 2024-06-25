@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:tutorial_getx/screens/screen_one.dart';
@@ -130,5 +131,102 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
     ));
+  }
+}
+*/
+
+import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  Widget build(context) {
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('GetX Tutorial'),
+        ),
+        body: Column(
+          children: [
+            Card(
+              child: ListTile(
+                title: Text('GetX Dialog Alert'),
+                subtitle: Text('Dialog alert using Getx'),
+                onTap: () {
+                  Get.defaultDialog(
+                    title: 'Delete Chat',
+                    titlePadding: EdgeInsets.only(top: 10),
+                    contentPadding: EdgeInsets.all(20),
+                    middleText: 'Are you sure you want to delete this chat?',
+                    // textConfirm: 'Yes',
+                    //textCancel: 'No',
+                    confirm:
+                        TextButton(onPressed: () {}, child: const Text('Ok')),
+                    cancel: TextButton(
+                        onPressed: () {
+                          //Navigator.of(context).pop();
+                          Get.back();
+                        },
+                        child: const Text('Cancel')),
+                  );
+                },
+              ),
+            ),
+            Card(
+              child: ListTile(
+                title: Text('GetX BottomSheet'),
+                subtitle: Text('BottomSheet using Getx'),
+                onTap: () {
+                  Get.bottomSheet(
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.grey,
+                      ),
+                      child: Column(
+                        children: [
+                          ListTile(
+                            leading: Icon(Icons.light_mode),
+                            title: Text('Light Mode'),
+                            onTap: () {
+                              Get.changeTheme(ThemeData.light());
+                            },
+                          ),
+                          ListTile(
+                            leading: Icon(Icons.dark_mode),
+                            title: Text('Dark Mode'),
+                            onTap: () {
+                              Get.changeTheme(ThemeData.dark());
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Get.snackbar(
+              'No Message',
+              'Displayed by Snackbar using GetX',
+              backgroundColor: Colors.grey,
+              snackPosition: SnackPosition.TOP,
+            );
+          },
+          child: const Icon(Icons.add),
+        ),
+      ),
+    );
   }
 }
